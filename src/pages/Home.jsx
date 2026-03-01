@@ -12,7 +12,7 @@ export default function Home() {
         <p className="home-subtitle">Your one-stop shop for all your needs</p>
       </div>
       <div className="container">
-        <h2 className="page-title">Our Pruducts</h2>
+        <h2 className="page-title">Our Products</h2>
         <div className="product-grid">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

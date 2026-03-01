@@ -1,24 +1,21 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { useEffect } from "react";
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
+import Checkout from "./pages/Checkout";
+import Navbar from "./components/Navbar";
 
 function App() {
-  useEffect(() => {
-    async function fetchUsers() {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users",
-        );
-
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-
-    fetchUsers();
-  }, []);
-  return <div></div>;
+  return (
+    <div className="app">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/checkout" element={<Checkout />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

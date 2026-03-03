@@ -1,20 +1,40 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useAuth();
+
   return (
-    <nav style={{ flexDirection: "row", display: "flex", gap: "1rem" }}>
-      <div style={{ gap: "1rem", display: "flex" }}>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-      </div>
-      <div style={{ gap: "1rem", display: "flex", marginLeft: "auto" }}>
-        {!user.isAuth ? (
-          <Link to="/login">Login</Link>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <Link to="/" className="navbar-brand">
+          ShopX
+        </Link>
+
+        <div className="navbar-links">
+          <Link to="/">Home</Link>
+          <Link to="/checkout">Cart</Link>
+        </div>
+        {!user ? (
+          <>
+            <div className="navbar-auth">
+              <div className="navbar-auth-links">
+                <Link to="/auth" className="btn btn-secondary">
+                  Login
+                </Link>
+                <Link to="/auth" className="btn btn-primary">
+                  Signup
+                </Link>
+              </div>
+            </div>
+          </>
         ) : (
-          <button onClick={logout}>Logout</button>
+          <div className="navbar-user">
+            <span className="navbar-user-name">Hello, {user.email}</span>
+            <button className="btn btn-secondary" onClick={logout}>
+              Logout
+            </button>
+          </div>
         )}
       </div>
     </nav>
